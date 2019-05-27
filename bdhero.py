@@ -1,5 +1,7 @@
 import numpy as np
 
+# UM TRABALHO FEITO PELA GRANDE DUPLA PEQUENA Mag e Rud
+
 def main():
     a = int(input("Informe a sua opção (Aleatório = 0, Você escolhe = outro numero): "))
     if(a != 0):
