@@ -30,10 +30,12 @@ def main():
                         is_blue = not is_blue
         # Bola enconsta no lado esquerdo
         if(t - r < 0):
-            t = r
+            if(not(t - r < 0 and k > altura//4 and k < 3 * altura//4)):
+                t = r
         # Bola encosta no lado direito
         if(t + r > largura):
-            t = largura - (r * 3) // 2
+            if(not(t + r > largura and k > altura//4 and k < 3 * altura // 4)):
+                t = largura - (r * 3) // 2
         # Bola encosta no teto
         if(k - r < 0):
             k = r
@@ -112,13 +114,13 @@ def main():
         if(distTY1 <= 0 and y[1]>k and distTX1 <= -4):
             k -= velBola
         # Gol do J2
-        if(t + r == largura and k > altura//4 and k < 3 * altura // 4):
+        if(t + r > largura and k > altura//4 and k < 3 * altura // 4):
             print("GOL DO CAIO")
             global placarJ2
             placarJ2 += 1
             return main()
         # Gol do J1
-        if(t - r == 0 and k > altura//4 and k < 3 * altura // 4):
+        if(t - r < 0 and k > altura//4 and k < 3 * altura // 4):
             print("GOL DO MAGNUS")
             global placarJ1
             placarJ1 += 1
