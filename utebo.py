@@ -1,18 +1,21 @@
 import pygame
 from math import ceil
 
+placarJ1 = 0
+placarJ2 = 0
+
 def main(): 
     pygame.init()
-    largura = 800
-    altura = 600
+    largura = 1200
+    altura = 800
     screen = pygame.display.set_mode((largura, altura))
     done = False
     is_blue = True
-    t=400 # X do centro do cí,0rculo
-    k=400 # Y do centro do círculo
+    t=largura//2 # X do centro do círculo
+    k=altura//2 # Y do centro do círculo
     tj = 20 # Tamanho do Jogador
     x = [largura - largura//15 - tj, largura//15]
-    y = [altura / 2 , altura / 2]
+    y = [altura / 2 - tj//2 , altura / 2 - tj//2]
     vel = 4
     r = 14
     tb = r * 2
@@ -25,14 +28,18 @@ def main():
                         done = True
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                         is_blue = not is_blue
+        # Bola enconsta no lado esquerdo
         if(t - r < 0):
             t = r
+        # Bola encosta no lado direito
         if(t + r > largura):
-            t = largura - r
+            t = largura - (r * 3) // 2
+        # Bola encosta no teto
         if(k - r < 0):
             k = r
+        # Bola encosta no chão
         if(k + r > altura):
-            k = altura - r
+            k = altura - (r * 3) // 2
         
         distX = abs(x[0] - x[1])
         distY = abs(y[0] - y[1])
@@ -95,7 +102,6 @@ def main():
         # Movimento da Bola pra Baixo (J1)
         if(distTY<=0 and y[0]<k and distTX <= -4):
             k += velBola
-            print(distTY, y[0], k, distTX)
         # Movimento da Bola pra Cima (J1)
         if(distTY<=0 and y[0]>k and distTX <= -4):
             k -= velBola
@@ -105,6 +111,18 @@ def main():
         # Movimento da Bola pra Cima (J2)
         if(distTY1 <= 0 and y[1]>k and distTX1 <= -4):
             k -= velBola
+        # Gol do J2
+        if(t + r == largura and k > altura//4 and k < 3 * altura // 4):
+            print("GOL DO CAIO")
+            global placarJ2
+            placarJ2 += 1
+            return main()
+        # Gol do J1
+        if(t - r == 0 and k > altura//4 and k < 3 * altura // 4):
+            print("GOL DO MAGNUS")
+            global placarJ1
+            placarJ1 += 1
+            return main()
         # Ferramenta de Debug
         if pressed[pygame.K_o]:
             print("jogador 1: ", distTX, distTY, "jogador 2: ", distTX1, distTY1 , t , k)
@@ -126,9 +144,9 @@ def main():
         pygame.draw.rect(screen,white,pygame.Rect(0,3 * altura//4,170,1))
         pygame.draw.rect(screen,white,pygame.Rect(170,altura//4,1,altura//2))
         # Área Direita
-        pygame.draw.rect(screen,white,pygame.Rect(630,altura//4,170,1))
-        pygame.draw.rect(screen,white,pygame.Rect(630,3 * altura//4,170,1))
-        pygame.draw.rect(screen,white,pygame.Rect(630,altura//4,1,altura//2))
+        pygame.draw.rect(screen,white,pygame.Rect(largura - 170,altura//4,170,1))
+        pygame.draw.rect(screen,white,pygame.Rect(largura - 170,3 * altura//4,170,1))
+        pygame.draw.rect(screen,white,pygame.Rect(largura - 170,altura//4,1,altura//2))
         # Jogadores de Futebol
         pygame.draw.rect(screen, blue, pygame.Rect(x[0], y[0], tj, tj))
         pygame.draw.rect(screen, orange, pygame.Rect(x[1], y[1], tj, tj))
@@ -139,3 +157,4 @@ def main():
         clock.tick(60)
 
 main()
+    
