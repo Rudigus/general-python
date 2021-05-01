@@ -83,7 +83,7 @@ def questao3():
     print(f"A quantidade de vogais na palavra informada é {numeroVogais}")
     
 def questao4():
-    arquivo = open("arquivoMaluco.txt", "r")
+    arquivo = open("arquivo_maluco.txt", "r")
     numero = int(arquivo.read())
     print(f"O fatorial de {numero} é {fatorial(numero)}")
     arquivo.close()

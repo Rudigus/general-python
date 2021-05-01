@@ -1,7 +1,7 @@
 import random
 
 def main():
-    arquivo = open("Palavras/oi.txt", "r")
+    arquivo = open("palavras.txt", "r")
     texto = arquivo.read()
     palavras = texto.split()
     indiceTema = random.randint(1,5) * 2 - 1
