@@ -2,7 +2,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 mpl.use('Agg')
 
-def plot(lines, figname = 'graph.png', xLabel = 'Tamanho das listas'):
+def plot(lines, figname = 'products/graph.png', xLabel = 'Tamanho das listas'):
   fig = plt.figure(figsize=(10, 8))
   ax = fig.add_subplot(111)
   for line in lines:

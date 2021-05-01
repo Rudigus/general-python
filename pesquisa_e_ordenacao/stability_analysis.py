@@ -1,5 +1,5 @@
-from generator import getRandomRepeatingListWithRange
-from sorter import bubbleSort, insertionSort, selectionSort, quickSort
+from utils.elementGenerator import getRandomRepeatingListWithRange
+from utils.elementSorter import bubbleSort, insertionSort, selectionSort, quickSort
 
 def printElements(elements):
   for i in range(len(elements)):
